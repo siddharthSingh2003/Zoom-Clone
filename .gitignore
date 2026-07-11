@@ -1,0 +1,28 @@
+# Backend (Python)
+.venv/
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.db
+backend/uvicorn.log
+backend/.env*
+!backend/.env.example
+*.pyc
+
+# Frontend (Next.js)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env*
+!frontend/.env.local.example
+frontend/npm-debug.log*
+frontend/frontend-dev.log
+
+# Original assignment prompt / interview-prep doc - kept locally, not published
+zoom-clone-build-guide.md
+
+# OS / editor
+.DS_Store
+
+# Claude Code local settings (machine-specific, not project config)
+.claude/settings.local.json
