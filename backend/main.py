@@ -44,7 +44,20 @@ if not session_secret:
     session_secret = "dev-only-insecure-secret"
     print("WARNING: SESSION_SECRET_KEY not set - using an insecure dev default. "
           "Set it in backend/.env before deploying.")
-app.add_middleware(SessionMiddleware, secret_key=session_secret, same_site="lax")
+
+# Locally, frontend (localhost:3000) and backend (localhost:8000) are the
+# same *site* (same registrable domain, different ports), so SameSite=Lax
+# works fine. In production the frontend and backend live on different
+# domains (e.g. vercel.app vs up.railway.app) - that's cross-site, so the
+# cookie needs SameSite=None, which browsers only honor if it's also
+# Secure (HTTPS-only). Set SESSION_SAME_SITE=none in production.
+session_same_site = os.getenv("SESSION_SAME_SITE", "lax")
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=session_secret,
+    same_site=session_same_site,
+    https_only=session_same_site == "none",
+)
 
 app.include_router(meetings.router)
 app.include_router(signaling.router)
