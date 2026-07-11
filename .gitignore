@@ -24,5 +24,7 @@ zoom-clone-build-guide.md
 # OS / editor
 .DS_Store
 
-# Claude Code local settings (machine-specific, not project config)
-.claude/settings.local.json
+# Local IDE/tool settings (machine-specific, not project config)
+.claude/
+.vscode/
+.idea/
